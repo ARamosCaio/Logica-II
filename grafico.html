@@ -1,0 +1,106 @@
+<canvas width="1500" height="1000"></canvas>
+
+<script>
+	tela = document.querySelector('canvas');
+	pincel = tela.getContext('2d');
+	pincel.strokeRect(0, 0, 1200, 1000);
+
+// Titulo do gráfico
+
+	pincel.font = '30px Georgia';
+	pincel.fillStyle = 'black';
+	pincel.fillText('Gráfico de uso de navegadores dos alunos da alura', 200, 100);
+
+
+// Função para criar datas para legenda
+
+	function label(x, y, texto, tamFont){
+
+		pincel.font = tamFont;
+		pincel.fillStyle= 'black';
+		pincel.fillText(texto, x, y);		
+	}
+	
+// Arrays com a porcentagens de uso dos navegadores, cores e nomes dos navegadores
+
+	var uses2015 = [200, 100, 80, 20]; // (50% 25% 20% 5%)*4 Para detalhar melhor
+	var uses2016 = [260, 80, 52, 8]; // (65% 20% 13% 2%)*4 Para detalhar melhor
+
+	var color = ['blue', 'yellow', 'red', 'green'];
+	var names = ['Chrome', 'Safari', 'Firefox', 'Outros'];
+
+// Função para criar gráfico de barras
+
+	var x = 200;
+	var somaAltura = 0;
+
+	function drawGraph(array){
+		
+		var posicaoY = 200;
+		var len = 150;
+
+		for(i=0; i <= array.length; i++){
+
+			pincel.fillStyle = color[i];
+        	pincel.fillRect(x, posicaoY, len, array[i]);
+        	pincel.strokeStyle='black';
+       		pincel.strokeRect(x, posicaoY, len, array[i]);
+       		posicaoY = posicaoY+array[i]
+     		
+    	}
+
+		x = x + 500;
+
+
+	}
+
+	// Funcão para legenda de cores
+
+	function drawBox(array){
+		x = 100
+		for(i=0; i < array.length; i++){
+
+			pincel.fillStyle = color[i];
+			pincel.fillRect(x-60, 800, 50, 50);
+
+			pincel.fillStroke = 'black'
+			pincel.strokeRect(x-60, 800, 50, 50);
+
+			pincel.font = '25px Georgia';
+			pincel.fillStyle= 'black';
+			pincel.fillText(array[i], x, 835);
+			x = x + 300;
+		}
+	}
+
+
+
+	drawGraph(uses2015);
+	drawGraph(uses2016);
+
+	label(250, 650, '2015', '25px Georgia');
+
+	// Porcentagens nas barras do gráfico 2015
+
+	label(260, 300, '50%', '20px Georgia');
+	label(260, 460, '25%', '20px Georgia');
+	label(260, 550, '20%', '20px Georgia');
+	label(260, 595, '5%', '20px Georgia');
+
+	
+
+	label(750, 650, '2016', '25px Georgia');
+
+	// Porcentagens nas barras do gráfico 2015
+
+	label(760, 360, '65%', '20px Georgia');
+	label(760, 510, '20%', '20px Georgia');
+	label(760, 570, '13%', '20px Georgia');
+	
+
+
+	
+	drawBox(names);
+	
+
+</script>
