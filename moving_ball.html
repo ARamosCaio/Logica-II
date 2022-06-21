@@ -1,0 +1,44 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+	var canvas = document.querySelector('canvas');
+	var pencil = canvas.getContext('2d');
+	var x = 40; 
+
+	var colors = ['Turquoise', 'MediumTurquoise', 'DarkTurquoise', 'LightSeaGreen', 'DarkCyan', 'Teal']
+
+	var i = 0;
+
+
+	function drawBall(x, y, r){
+		
+		pencil.fillStyle = colors[i];
+		pencil.beginPath();
+		pencil.arc(x, y, r, 0, 2*Math.PI);
+		pencil.fillStroke = 'black';
+		pencil.stroke();
+		pencil.fill();		
+	}
+
+	function clear(){
+
+		pencil.clearRect(0, 0, 600, 400);
+	}
+
+	function animate() {
+		clear();
+		drawBall(x, 40, 20);
+		x = x + 5;
+		i++;
+		if (i==5){
+			i = 0;
+		}
+		console.log(i)
+		if (x >=600){
+			x = 0;
+		}
+		
+	}	
+
+	setInterval(animate, 200)
+</script>
